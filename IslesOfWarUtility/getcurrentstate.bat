@@ -1,0 +1,1 @@
+curl --data-binary "{\"jsonrpc\": \"2.0\", \"id\":\"curltest\", \"method\": \"getcurrentstate\"}" -H "content-type: text/plain;" http://127.0.0.1:8900/ >isleofwar.json

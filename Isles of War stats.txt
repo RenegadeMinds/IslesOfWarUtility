@@ -1,0 +1,474 @@
+PLAYER COMBAT UNITS
+Cairo Denji
+	Riflemen            =         252
+	Machine Gunners     =          10
+	Bazookamen          =          12
+	Light Tanks         =          12
+	Medium Tanks        =          12
+	Heavy Tanks         =          12
+	Light Figters       =          17
+	Medium Fighters     =          10
+	Bombers             =          15
+tyki
+	Riflemen            =       4,371
+	Machine Gunners     =       1,340
+	Bazookamen          =       2,298
+	Light Tanks         =         490
+	Medium Tanks        =         468
+	Heavy Tanks         =         599
+	Light Figters       =         295
+	Medium Fighters     =         292
+	Bombers             =         459
+Chainsaw
+	Riflemen            =      10,395
+	Machine Gunners     =       3,496
+	Bazookamen          =       1,159
+	Light Tanks         =         451
+	Medium Tanks        =         186
+	Heavy Tanks         =         265
+	Light Figters       =         520
+	Medium Fighters     =         280
+	Bombers             =         146
+Ryumaster
+	Riflemen            =         291
+	Machine Gunners     =          20
+	Bazookamen          =          98
+	Light Tanks         =          28
+	Medium Tanks        =           0
+	Heavy Tanks         =          20
+	Light Figters       =           0
+	Medium Fighters     =           0
+	Bombers             =          23
+daveidc
+	Riflemen            =           0
+	Machine Gunners     =           0
+	Bazookamen          =           0
+	Light Tanks         =           5
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =           5
+	Medium Fighters     =           0
+	Bombers             =           0
+Anubis
+	Riflemen            =       1,445
+	Machine Gunners     =           0
+	Bazookamen          =         745
+	Light Tanks         =           0
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =          75
+	Medium Fighters     =          75
+	Bombers             =           0
+ CRBU
+	Riflemen            =           0
+	Machine Gunners     =           0
+	Bazookamen          =           0
+	Light Tanks         =           0
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =           0
+	Medium Fighters     =           0
+	Bombers             =           0
+liquid
+	Riflemen            =         260
+	Machine Gunners     =         160
+	Bazookamen          =         160
+	Light Tanks         =          40
+	Medium Tanks        =          40
+	Heavy Tanks         =          40
+	Light Figters       =          30
+	Medium Fighters     =          30
+	Bombers             =          30
+AutoTxXx
+	Riflemen            =       1,250
+	Machine Gunners     =       1,130
+	Bazookamen          =         360
+	Light Tanks         =           0
+	Medium Tanks        =          55
+	Heavy Tanks         =          20
+	Light Figters       =           0
+	Medium Fighters     =          15
+	Bombers             =         100
+ColdStorm
+	Riflemen            =         230
+	Machine Gunners     =          55
+	Bazookamen          =          95
+	Light Tanks         =          10
+	Medium Tanks        =          10
+	Heavy Tanks         =          30
+	Light Figters       =           5
+	Medium Fighters     =           5
+	Bombers             =           6
+1812
+	Riflemen            =          25
+	Machine Gunners     =          50
+	Bazookamen          =           0
+	Light Tanks         =          10
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =           0
+	Medium Fighters     =           0
+	Bombers             =           0
+obeeus
+	Riflemen            =          20
+	Machine Gunners     =          20
+	Bazookamen          =          20
+	Light Tanks         =           2
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =          15
+	Medium Fighters     =          10
+	Bombers             =          12
+OSYA
+	Riflemen            =         120
+	Machine Gunners     =         110
+	Bazookamen          =         110
+	Light Tanks         =           1
+	Medium Tanks        =           1
+	Heavy Tanks         =           1
+	Light Figters       =          10
+	Medium Fighters     =           0
+	Bombers             =           0
+snailbrain
+	Riflemen            =           0
+	Machine Gunners     =          10
+	Bazookamen          =           0
+	Light Tanks         =           3
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =           0
+	Medium Fighters     =          10
+	Bombers             =           0
+111010111
+	Riflemen            =         151
+	Machine Gunners     =         129
+	Bazookamen          =       1,400
+	Light Tanks         =           9
+	Medium Tanks        =          19
+	Heavy Tanks         =          15
+	Light Figters       =           9
+	Medium Fighters     =          13
+	Bombers             =          10
+DisgustingHuman
+	Riflemen            =         100
+	Machine Gunners     =         100
+	Bazookamen          =          38
+	Light Tanks         =          30
+	Medium Tanks        =           0
+	Heavy Tanks         =          30
+	Light Figters       =           0
+	Medium Fighters     =          20
+	Bombers             =          10
+sammy
+	Riflemen            =          50
+	Machine Gunners     =          25
+	Bazookamen          =          20
+	Light Tanks         =          25
+	Medium Tanks        =          25
+	Heavy Tanks         =          25
+	Light Figters       =          25
+	Medium Fighters     =          25
+	Bombers             =          25
+ecnnn
+	Riflemen            =          10
+	Machine Gunners     =          25
+	Bazookamen          =           5
+	Light Tanks         =           1
+	Medium Tanks        =          12
+	Heavy Tanks         =           2
+	Light Figters       =           3
+	Medium Fighters     =          13
+	Bombers             =           3
+Grahnite
+	Riflemen            =           4
+	Machine Gunners     =           4
+	Bazookamen          =           4
+	Light Tanks         =          22
+	Medium Tanks        =           2
+	Heavy Tanks         =           0
+	Light Figters       =          20
+	Medium Fighters     =           0
+	Bombers             =           0
+Bitcollect2x
+	Riflemen            =       2,600
+	Machine Gunners     =         550
+	Bazookamen          =         360
+	Light Tanks         =         130
+	Medium Tanks        =         130
+	Heavy Tanks         =         190
+	Light Figters       =         145
+	Medium Fighters     =         145
+	Bombers             =         145
+Nietzsche
+	Riflemen            =          60
+	Machine Gunners     =         210
+	Bazookamen          =          30
+	Light Tanks         =          15
+	Medium Tanks        =          20
+	Heavy Tanks         =          15
+	Light Figters       =           0
+	Medium Fighters     =           0
+	Bombers             =           0
+MohammadBzG
+	Riflemen            =           0
+	Machine Gunners     =           0
+	Bazookamen          =          10
+	Light Tanks         =           0
+	Medium Tanks        =          10
+	Heavy Tanks         =           0
+	Light Figters       =          10
+	Medium Fighters     =           0
+	Bombers             =           0
+Nederob
+	Riflemen            =         500
+	Machine Gunners     =         250
+	Bazookamen          =          50
+	Light Tanks         =           0
+	Medium Tanks        =          10
+	Heavy Tanks         =           0
+	Light Figters       =           5
+	Medium Fighters     =          10
+	Bombers             =           5
+rileycb4G
+	Riflemen            =       1,100
+	Machine Gunners     =         250
+	Bazookamen          =           0
+	Light Tanks         =          10
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =          10
+	Medium Fighters     =           0
+	Bombers             =           0
+Crash1337
+	Riflemen            =           0
+	Machine Gunners     =           0
+	Bazookamen          =           0
+	Light Tanks         =           0
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =           0
+	Medium Fighters     =           0
+	Bombers             =           0
+Chainfist
+	Riflemen            =           0
+	Machine Gunners     =           0
+	Bazookamen          =           0
+	Light Tanks         =           0
+	Medium Tanks        =           0
+	Heavy Tanks         =           0
+	Light Figters       =           0
+	Medium Fighters     =           0
+	Bombers             =           0
+PLAYER RESOURCES
+Cairo Denji
+	Warbux          =         531,507
+	Oil             =       1,476,246
+	Metal           =       7,656,827
+	Concrete        =       2,103,519
+tyki
+	Warbux          =       1,172,872
+	Oil             =       8,755,376
+	Metal           =      11,439,141
+	Concrete        =       3,475,799
+Chainsaw
+	Warbux          =         794,035
+	Oil             =       3,163,918
+	Metal           =       3,501,087
+	Concrete        =       1,936,850
+Ryumaster
+	Warbux          =       1,084,596
+	Oil             =       1,362,488
+	Metal           =       1,652,510
+	Concrete        =       1,163,241
+daveidc
+	Warbux          =       1,036,589
+	Oil             =       1,104,463
+	Metal           =       1,161,973
+	Concrete        =       1,109,473
+Anubis
+	Warbux          =         475,038
+	Oil             =       1,613,036
+	Metal           =       1,985,338
+	Concrete        =       1,201,066
+ CRBU
+	Warbux          =               0
+	Oil             =          64,076
+	Metal           =          64,076
+	Concrete        =          64,076
+liquid
+	Warbux          =       1,027,779
+	Oil             =       1,389,147
+	Metal           =       1,542,712
+	Concrete        =       1,230,232
+AutoTxXx
+	Warbux          =         735,172
+	Oil             =       1,111,243
+	Metal           =       1,482,785
+	Concrete        =       1,049,302
+ColdStorm
+	Warbux          =         306,327
+	Oil             =         708,852
+	Metal           =       1,432,939
+	Concrete        =         185,182
+1812
+	Warbux          =          82,225
+	Oil             =         374,084
+	Metal           =         842,523
+	Concrete        =         136,039
+obeeus
+	Warbux          =          24,667
+	Oil             =         148,048
+	Metal           =         350,108
+	Concrete        =         100,597
+OSYA
+	Warbux          =          52,171
+	Oil             =         157,050
+	Metal           =         267,272
+	Concrete        =         146,924
+snailbrain
+	Warbux          =          67,462
+	Oil             =         137,762
+	Metal           =          85,512
+	Concrete        =         104,088
+111010111
+	Warbux          =       7,080,440
+	Oil             =       7,543,901
+	Metal           =       5,264,906
+	Concrete        =       7,714,034
+DisgustingHuman
+	Warbux          =          75,358
+	Oil             =         231,004
+	Metal           =         482,375
+	Concrete        =          64,965
+sammy
+	Warbux          =          32,396
+	Oil             =          98,264
+	Metal           =         285,668
+	Concrete        =          99,164
+ecnnn
+	Warbux          =          51,273
+	Oil             =         382,793
+	Metal           =         284,369
+	Concrete        =         131,896
+Grahnite
+	Warbux          =          58,953
+	Oil             =         206,689
+	Metal           =         202,291
+	Concrete        =         130,739
+Bitcollect2x
+	Warbux          =         852,667
+	Oil             =       7,479,852
+	Metal           =      13,501,767
+	Concrete        =       2,438,005
+Nietzsche
+	Warbux          =          14,890
+	Oil             =          73,222
+	Metal           =          61,003
+	Concrete        =          80,282
+MohammadBzG
+	Warbux          =         142,281
+	Oil             =         249,656
+	Metal           =         254,368
+	Concrete        =         197,537
+Nederob
+	Warbux          =          14,210
+	Oil             =          60,998
+	Metal           =          44,211
+	Concrete        =          64,144
+rileycb4G
+	Warbux          =          22,805
+	Oil             =         129,953
+	Metal           =         169,942
+	Concrete        =          55,968
+Crash1337
+	Warbux          =               0
+	Oil             =           2,861
+	Metal           =           2,861
+	Concrete        =           2,861
+Chainfist
+	Warbux          =          50,000
+	Oil             =          50,179
+	Metal           =          50,179
+	Concrete        =          50,179
+ISLANDS AND THEIR DEFENSES
+111010111 owns c252a7c3d6b7ed479ee742ccc26641f3b70be4d07068e8496d0063f211e76268
+111010111 owns c976f6313d8d288425e1c094a22979807ab221026b8b877b667687970ff80a73
+111010111 owns ed30d02e8449ca50a1d200969bef223f3bd30ebcd526078534e73773054dcb0a
+111010111 owns a7b6052772c6143ed4e07ef7e07121cb84bd0b4e9e19a59980a135e8dd1cb181
+111010111 owns b987794d4cacb7738cf7f13cfdc3d2b3ca5e6faa7b4d932706105d4a95c41fcc
+AutoTxXx owns 16035bfc60b78ecabb32aab469bb26845a6cc4296707a06215b536b2adfd84d5
+AutoTxXx owns 0aad04cf1a72777da54e6686854b97e238c7456c23d4d73b8ae66c95aec884c0
+ColdStorm owns 45787e3c3a00772f8a399ed93e2816a713432943b4675c33c8ebe9e1ff983359
+111010111 owns 18c5c22bd2e4f355d7c9ef47006188ed4cf344889d982de998da965f44fde03d
+111010111 owns 63b0695e55a568330f2f7209737a2c0077a166b59e22b128ebb5111fba2f5817
+111010111 owns 038a675c4a4b49515340c7385d185107b85f58463cc2773cdf49a9714b012581
+111010111 owns d12e802770dc5a41e68da8f0b6b5fa9b070a2e5e8857ed713d5eb026a55a12c9
+111010111 owns 06245d1413126b646e5e77d03132407558c86d5b428519292ec8d5e43e209e6b
+111010111 owns da77c04e96b1b7cf66a95310ecd3ce41798775beffb9b83e38f30c00d80e48c5
+111010111 owns 189040323f3b2c437bf6b7e716f8df06652b7cc1c09a0cd8ea6af800d85d8048
+Chainsaw owns 16d2e1b088a15474ce2595689fbe782a064027c17f16f4c1864a8fcd8de4a31f
+ecnnn owns a85c5cc7a6345ed1486634d6170a8f0898d9abe8fc96290a84019b68aa63bf12
+111010111 owns 026f65e75bfa9f4ec8ac0428c9c1aaccb3fe2b62253364ed7a76dc75a02472b0
+111010111 owns 6f2a100ee1f7776393e0046ea648691c4c2958521ff1716f85e064891bd4abf8
+111010111 owns 130c848c7f5b231fa9328439be9f8a5120b49c9992093b78c0fe084b7f611a1f
+tyki owns 01f3f127f9ed993645c475d2652138b4ea3f7c9eb23e0b8725e74d9c2eb0e75c
+111010111 owns 0b147a3d56a44264fd0409a99427f12c0d34e9a71672ab19c4a5cfa229ea6e48
+111010111 owns ce3f6f2b518de400e0ee84993d442cdb485bd8c8192fd58ee0d1c221caa86caf
+111010111 owns 13b70af271b259c92a939d7bfcc6b335930426e67ef780bc7ee4f8933106c03d
+111010111 owns 3fbea7ab735963604b866c31f73c98ce3e2c4c944ed1f36c681113ff4b251d2a
+111010111 owns 7f1357a5302434370e9e35d3de19cebf8cdc78d8358bfa634e10af68c328371f
+111010111 owns 9f0ad08fe6cb5f7d055cbc934649e1389fb24b8cee70c54a9cca89b14e6e32a5
+111010111 owns 628e28cfb29a60c45ef69160f719a946dd649dc62a932a83ca0c8d9f16966fd3
+111010111 owns ba79eb7cc9d80f1bc5119b4f184b33d21496e280b6a778d4b70fda72620b7a44
+111010111 owns f04f4c826e7f4e8d5c46f389c5f88c776fd9959458675bd784e4f34b86ea41ac
+Cairo Denji owns d6f58b601d0c1175517675485b8f67246264c8602254c5c995f18d78a612f053
+111010111 owns 84235bd1b58eeea018b4e6b1265d22d003a4e02ce5acbcc4e8d81264213ffea2
+MohammadBzG owns be9589022edabf09a1fe84b40ee208f20cc6eb73af3c611c98d5151551537cfd
+111010111 owns 9901b8f64bc0c27ffbaa8ec063e0e2182341d0341c69fc18cdfc046a6888acb9
+Cairo Denji owns b7277f6748dd43082df651f76013fe084465dc287df00351697315e64262ac99
+Cairo Denji owns aba1dc07863d721d3201b1e69647b8bbbeaeeebd026ddca32d5774259601d253
+111010111 owns bf37a150fc6cd85255cabf84312d1918adb3a138ef44a56daf35eae3a787c5a6
+tyki owns ea95f33980a18e08014255aaa0b5151f7e98c13e428cf1dd6d912821d32638cb
+tyki owns b022fda38c29080ad9c294c5b75e3a80d1435cd471fa7a7f3ebf66c3436b0531
+111010111 owns 647120b50dec338e755ebf72c611bd5bb6f39bccffc84b79e55c08b346206227
+Bitcollect2x owns 4d9bb001c45ada820657cf62be66663b561879b957cc10276eb93ab0eef4ff9c
+Bitcollect2x owns 136ea48c0fec7094e2533c8786e4254295907cb4be6c34b110eb476f44269d44
+tyki owns cc33c0d5e23c998041a380b1a72457b98d5192d41e705a37a569d6b27052082c
+Bitcollect2x owns 286d20d51f5885f5f906a8a5c4356c55ce48a450e6df9860062e70ce46c247f0
+111010111 owns 2f38696d6883d1cf3ba4a0c921e064039f8075363c1027e609c01d75988b4ca0
+111010111 owns fd21cc297cbce5dde05cf8c616cbb4cad5bed8122521a23d76b46209f4116a32
+111010111 owns 90d7ea783882637781c5ca63aa529fa8b4c90c2a5ab8568b49550e305c6e7835
+111010111 owns 48db1cb55960211267c4062c6eefef9959379cfcba665196dabd50d3d73b1eae
+111010111 owns d2d7e05f68d8a5dfd9d10a2e224a4171d101017a45853c45a5ac5c977c157841
+111010111 owns 3ceeadfe8177b352eb5601901b00b02de0d2a4814630a437253a7f00d303dbe6
+111010111 owns 1bf2ece210f1df03eda207b93ab955192c7b43ce6c8eb5b85540e12619c9d9e3
+111010111 owns a5b96a619d212423923fc455aa489c98007f870400dbe73c60faf541f2ec5e02
+111010111 owns b63fdb05183579b5c89133bd3e9b768d8ca23bcaf048b769765668a7ab87eca5
+Chainsaw owns d7982983eb1c2c951b1bfaff0dbe1d88729b82f2b01165b6de5d8a72ce44733e
+111010111 owns 27127f619b317b1a9e20ebf56a922600d050fa66b5cda3981c0357d7491edbf6
+111010111 owns 464766c1ddcbb993eb44e3168d4bbb54ded9614b64438a39678795c759319170
+111010111 owns c829c21a540e3228f43dca505307e27ea257979ffa5a5167fa57b73bcc9fd023
+111010111 owns 9f7cbccbb82d021cf4a33901406381b00082e9892959c10608d3c1f56fd0234a
+111010111 owns 458f2aa3b0eec5cae267be6774197c7f2b25d1bf25aa114559f5acfa3157ec00
+111010111 owns b41e7bcf74a21a9d435b96f79ab573c7972d5c7d0159ffddda578325aba90763
+111010111 owns 28e7ae7efdccad3556dbcc6edac5e30fd8e7bf70dc9714165caa7b74dbe5fcb9
+111010111 owns 69d1b0c9b2efae6613a83806292674703d657a0cb3f1b4b31893a36cac31ea49
+Chainsaw owns cbe213786bfac615536608e61af753e0fb45e85fcaa771e040fe152164a20258
+111010111 owns 382fbb10c0439e2fecdc1d4890f5b2027479333e071e4ed12c7ee2a88f840e2e
+Chainsaw owns f1ddf34230bbb96b9961a48f30ff3e369912665115566f71197d7f9c5233e69e
+Chainsaw owns d19c46edbee0b7cc9e449e584d454cf4c24fa09efc2030b7c42710cf8bbe766e
+111010111 owns 7e690a1b030a5c86821d234cc14f2a0e13f6d75888b36551a1188848fcacc880
+Chainsaw owns 26d99187ee7306329f1d1b6f5e12d7177001ffce1c8d46d83a2d9b43d9c88877
+Chainsaw owns c4224eaa93e4c1066b068924af88e74a8a93abc48ad6d00616a11fa860820a29
+Chainsaw owns 308388129db6654be4cb411f6d22ea738b8a8693cc6469fb9fbaeab811053e94
+HOW MANY ISLANDS DOES EACH PLAYER OWN?
+70 ISLANDS TOTAL
+111010111 owns 47 islands
+AutoTxXx owns 2 islands
+ColdStorm owns 1 islands
+Chainsaw owns 8 islands
+ecnnn owns 1 islands
+tyki owns 4 islands
+Cairo Denji owns 3 islands
+MohammadBzG owns 1 islands
+Bitcollect2x owns 3 islands
