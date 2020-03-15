@@ -218,7 +218,12 @@ namespace IslesOfWarUtility
                 sb.AppendLine(v.Key + " owns " + v.Value.ToString() + " islands");
             }
 
-            txtOutput.Text = sb.ToString();
+            //srtbResults.Text = sb.ToString();
+
+            //string newtext = sb.ToString().Replace(" ", "&nbsp;").Replace("\t", "&nbsp;&nbsp;").Replace("\r\n", "<br />\r\n"); // ;
+            //wbBrowser.DocumentText = "<div style='font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;'>" + newtext + "</div>";
+            string newtext = sb.ToString(); // ;
+            wbBrowser.DocumentText = "<pre>" + newtext + "</pre>";
         }
 
         private string GetBunkersFromChar(char bunkers)
@@ -307,6 +312,20 @@ namespace IslesOfWarUtility
             p.WaitForExit();
 
             return output;
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Control && e.KeyCode == Keys.F))
+            {
+                // Do search
+                Search();
+            }
+        }
+
+        private void Search()
+        {
+            
         }
 
     }

@@ -87,5 +87,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SearchableControls\SearchableControls.csproj">
+      <Project>{45a3f930-1a71-4b5d-905a-2cd1dd700ef6}</Project>
+      <Name>SearchableControls</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
