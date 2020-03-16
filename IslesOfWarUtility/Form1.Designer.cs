@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnGetGameState = new System.Windows.Forms.Button();
             this.srtbResults = new SearchableControls.SearchableRichTextBox();
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
@@ -123,6 +124,7 @@
             this.Controls.Add(this.cbxPlayers);
             this.Controls.Add(this.srtbResults);
             this.Controls.Add(this.btnGetGameState);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Isles of War utility";
