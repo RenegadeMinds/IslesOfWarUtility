@@ -27,7 +27,7 @@ namespace IslesOfWarUtility
 
         private void btnGetGameState_Click(object sender, EventArgs e)
         {
-            string s = Blah("getcurrentstate.bat");
+            //string s = Blah("getcurrentstate.bat");
             Application.DoEvents();
 
             GspRoot gsp = GetGsp();
@@ -38,22 +38,29 @@ namespace IslesOfWarUtility
             PopulatePlayerDropDown(gsp);
 
             StringBuilder sb = new StringBuilder();
+            // set up header
+            sb.AppendLine(GetHeader());
+            // Set up navigation
+            sb.AppendLine(GetFloatingMenu());
+            // Set up sb with basic CSS
+            sb.AppendLine(GetCSS());
+
             IslesOfWar.UnitNames unitNames = new UnitNames();
             int pad = 20; // used to pad names & stuff
 
             // Some basic overview stats first
-            sb.AppendLine("Player count = " + players.Count.ToString());
-            sb.AppendLine("Island count = " + gsp.Result.Gamestate.Islands.Count.ToString());
-            sb.AppendLine();
+            sb.AppendLine("<p>Player count = " + players.Count.ToString() + "</p>");
+            sb.AppendLine("<p>Island count = " + gsp.Result.Gamestate.Islands.Count.ToString() + "</p>");
+            sb.AppendLine("<p></p>");
 
             // Get combat unit numbers for each player. 
-            sb.AppendLine("PLAYER COMBAT UNITS");
-            sb.AppendLine();
+            sb.AppendLine("<h1><a id=\"PlayerCombatUnits\"></a>PLAYER COMBAT UNITS</h1>");
+            sb.AppendLine("<p></p>");
             foreach (var p in players)
             {
                 string name = p.Key;
                 Player player = p.Value;
-                sb.AppendLine(name);
+                sb.AppendLine("<h1>"+ name + "</h1>");
                 // TOTAL units
                 sb.AppendLine(GetTotalCombatUnits(player, name, pad));
                 // AVAILABLE units
@@ -62,23 +69,23 @@ namespace IslesOfWarUtility
 
             // Get resources for each player.
             IslesOfWar.ResourceNames resourceNames = new ResourceNames();
-            sb.AppendLine();
-            sb.AppendLine("PLAYER RESOURCES");
-            sb.AppendLine();
+            sb.AppendLine("<p></p>");
+            sb.AppendLine("<h1><a id=\"PlayerResources\"></a>PLAYER RESOURCES</h1>");
+            sb.AppendLine("<p></p>");
             foreach (var p in players)
             {
                 string name = p.Key;
                 Player player = p.Value;
-                sb.AppendLine(name);
+                sb.AppendLine("<h2>" + name + "</h2>");
 
                 sb.AppendLine( GetPlayerResources(player, resourceNames));
             }
 
             // What islands have what resources or defenses? Let's ignore resources for now as it's a bunch of arrays - just do defenses. 
             Dictionary<string, Island> islands = gsp.Result.Gamestate.Islands;
-            sb.AppendLine();
-            sb.AppendLine("ISLANDS AND THEIR DEFENSES");
-            sb.AppendLine();
+            sb.AppendLine("<p></p>");
+            sb.AppendLine("<h1><a id=\"IslandsAndTheirDefenses\"></a>ISLANDS AND THEIR DEFENSES</h1>");
+            sb.AppendLine("<p></p>");
             Dictionary<string, int> playerIslandCount = new Dictionary<string, int>();
             int islandCount = 0;
 
@@ -86,7 +93,7 @@ namespace IslesOfWarUtility
             {
                 string hexName = isle.Key;
                 Island island = isle.Value;
-                sb.AppendLine(island.Owner + " owns " + hexName);
+                sb.AppendLine("<pre>" + island.Owner + " owns " + hexName + "</pre>");
 
                 if (island.SquadCounts != null && island.SquadPlans != null)
                 {
@@ -110,17 +117,19 @@ namespace IslesOfWarUtility
                     islandCount++;
                 }
             }
-            sb.AppendLine();
-            sb.AppendLine("HOW MANY ISLANDS DOES EACH PLAYER OWN?");
-            sb.AppendLine(islandCount.ToString() + " ISLANDS TOTAL");
-            sb.AppendLine();
+            sb.AppendLine("<p></p>");
+            sb.AppendLine("<h1><a id=\"HowManyIslands\"></a>HOW MANY ISLANDS DOES EACH PLAYER OWN?</h1>");
+            sb.AppendLine("<h2>" + islandCount.ToString() + " ISLANDS TOTAL</h2>");
+            sb.AppendLine("<p></p><pre>");
             foreach (var v in playerIslandCount)
             {
-                sb.AppendLine(v.Key + " owns " + v.Value.ToString() + " islands");
+                sb.AppendLine("" + v.Key + " owns " + v.Value.ToString() + " islands");
             }
+            sb.AppendLine("</pre>");
+            sb.AppendLine(GetFooter());
 
-            string newtext = sb.ToString(); 
-            wbBrowser.DocumentText = "<pre>" + newtext + "</pre>";
+            string newtext = sb.ToString();
+            wbBrowser.DocumentText = newtext; // "<pre>" + newtext + "</pre>";
         }
 
         private GspRoot GetGsp()
@@ -148,11 +157,11 @@ namespace IslesOfWarUtility
             int i = 0;
             int pad = 20; // used to pad names & stuff
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("UNITS AVAILABLE TO DEPLOY");
-            sb.AppendLine();
+            sb.AppendLine("<h2>UNITS AVAILABLE TO DEPLOY</h2>");
+            sb.AppendLine("<p></p><pre>");
             foreach (long unitCount in units)
             {
-                sb.Append("\t");
+                sb.Append("&nbsp;&nbsp;&nbsp;&nbsp;");
                 switch (i)
                 {
                     case 0:
@@ -190,6 +199,7 @@ namespace IslesOfWarUtility
 
                 sb.Append("=" + string.Format("{0:n0}", unitCount).ToString().PadLeft(12, ' ') + Environment.NewLine);
             }
+            sb.AppendLine("</pre>");
 
             return sb.ToString();
         }
@@ -199,10 +209,10 @@ namespace IslesOfWarUtility
             List<long> resources = player.Resources;
             int i = 0;
             StringBuilder sb = new StringBuilder();
-
+            sb.AppendLine("<pre>");
             foreach (long resourceCount in resources)
             {
-                sb.Append("\t");
+                sb.Append("&nbsp;&nbsp;&nbsp;&nbsp;");
                 switch (i)
                 {
                     case 0:
@@ -223,6 +233,7 @@ namespace IslesOfWarUtility
                 i++;
                 sb.Append("=" + string.Format("{0:n0}", resourceCount).ToString().PadLeft(16, ' ') + Environment.NewLine);
             }
+            sb.AppendLine("</pre>");
 
             return sb.ToString();
         }
@@ -231,7 +242,7 @@ namespace IslesOfWarUtility
         {
             List<long> sc = new List<long>();
             StringBuilder sb = new StringBuilder();
-
+            sb.AppendLine("<pre>");
             for (int j = 0; j < squadCountCount; j++)
             {
                 sc = island.SquadCounts[j];
@@ -254,6 +265,7 @@ namespace IslesOfWarUtility
                 sb.AppendLine("\t\t" + unitNames.MediumFighters.PadRight(pad) + " = " + sc[7].ToString().PadLeft(12, ' '));
                 sb.AppendLine("\t\t" + unitNames.Bombers.PadRight(pad) + " = " + sc[8].ToString().PadLeft(12, ' '));
             }
+            sb.AppendLine("</pre>");
 
             return sb.ToString();
         }
@@ -313,35 +325,35 @@ namespace IslesOfWarUtility
             StringBuilder sb = new StringBuilder();
             IslesOfWar.UnitNames unitNames = new UnitNames();
 
-            sb.AppendLine("TOTAL COMBAT UNITS FOR " + name);
-            sb.AppendLine("");
+            sb.AppendLine("<h2>TOTAL COMBAT UNITS FOR " + name + "</h2>");
+            sb.AppendLine("<p></p>");
 
-            sb.Append("\t" + unitNames.Riflemen.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", riflemen).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Riflemen.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", riflemen).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.MachineGunners.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", machinegunners).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MachineGunners.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", machinegunners).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.Bazookamen.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", bazookamen).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Bazookamen.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", bazookamen).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.LightTanks.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", lighttanks).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.LightTanks.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", lighttanks).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.MediumTanks.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", mediumtanks).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MediumTanks.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", mediumtanks).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.HeavyTanks.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", heavytanks).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.HeavyTanks.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", heavytanks).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.LightFighters.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", lightfighters).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.LightFighters.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", lightfighters).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.MediumFighters.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", mediumfighters).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MediumFighters.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", mediumfighters).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-            sb.Append("\t" + unitNames.Bombers.PadRight(pad, ' '));
-            sb.Append("=" + string.Format("{0:n0}", bombers).ToString().PadLeft(12, ' ') + Environment.NewLine);
+            sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Bombers.PadRight(pad, ' '));
+            sb.Append("=" + string.Format("{0:n0}", bombers).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
 
 
@@ -495,6 +507,81 @@ namespace IslesOfWarUtility
 
         bool skip = true;
 
+        private string GetCSS()
+        {
+            string css = string.Empty;
+
+            css = @"
+<style>
+h1 {
+	color: #ff0000;
+	font-family: ""Courier New"", monospace;
+}
+
+h2 {
+	color: #0000ff;
+	font-family: ""Courier New"", monospace;
+}
+
+pre {
+	font-family: ""Courier New"", monospace;
+	line-height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+p {
+	font-family: ""Courier New"", monospace;
+}
+</style>
+";
+
+            return css;
+        }
+
+        private string GetFloatingMenu()
+        {
+            string menu = @"
+<div id=""floatdiv"" style=""  
+    position:fixed;  
+    top:10px;right:10px;  
+    z-index:100; 
+    width: 200px; 
+    height: 200px; 
+    margin: auto; 
+    padding: 10px;
+    border-radius: 10px; 
+    border: 3px solid #1c87c9; 
+    background-color: white;
+"">  
+<a href=""#top"">Top</a><br /><br />
+<a href=""#PlayerCombatUnits"">Player combat units</a><br /><br />
+<a href=""#PlayerResources"">Player resources</a><br /><br />
+<a href=""#IslandsAndTheirDefenses"">Islands and their defenses</a><br /><br />
+<a href=""#HowManyIslands"">How many islands?</a><br />
+</div>";
+
+            return menu;
+        }
+
+        private string GetHeader()
+        {
+            string header = string.Empty; ;
+
+            header = @"<!doctype html><html><head><title>Isles of War Utility</title></head><body>";
+
+            return header;
+        }
+
+        private string GetFooter()
+        {
+            string footer = string.Empty;
+
+            footer = "</body></html>";
+
+            return footer;
+        }
+
         private void cbxPlayers_SelectedIndexChanged(object sender, EventArgs e)
         {
             // skip 1 time
@@ -517,6 +604,12 @@ namespace IslesOfWarUtility
             Player player = players[name];
 
             StringBuilder sb = new StringBuilder();
+            // set up header
+            sb.AppendLine(GetHeader());
+            // Set up navigation
+            //sb.AppendLine(GetFloatingMenu()); // no need for a menu
+            // Set up sb with basic CSS
+            sb.AppendLine(GetCSS());
             IslesOfWar.UnitNames unitNames = new UnitNames();
             int pad = 20; // used to pad names & stuff
 
@@ -529,20 +622,21 @@ namespace IslesOfWarUtility
 
             // Get resources for player.
             IslesOfWar.ResourceNames resourceNames = new ResourceNames();
-            sb.AppendLine("PLAYER RESOURCES FOR " + name);
+            sb.AppendLine("<h2>PLAYER RESOURCES FOR " + name + "</h2>");
             sb.AppendLine();
 
             sb.AppendLine(GetPlayerResources(player, resourceNames));
 
             // islands & defences
-            sb.AppendLine("ISLANDS AND THEIR DEFENSES");
+            sb.AppendLine("<p></p>");
+            sb.AppendLine("<h2>ISLANDS AND THEIR DEFENSES</h2>");
 
             // What islands have what resources or defenses? Let's ignore resources for now as it's a bunch of arrays - just do defenses. 
-            sb.AppendLine();
-            sb.AppendLine("###PLAYERISLANDCOUNT###"); // place holder to replace
+            sb.AppendLine("<p></p>");
+            sb.AppendLine("<h3>###PLAYERISLANDCOUNT###</h3>"); // place holder to replace
 
             Dictionary<string, Island> islands = gsp.Result.Gamestate.Islands;
-            sb.AppendLine();
+            sb.AppendLine("<p></p>");
             Dictionary<string, int> playerIslandCount = new Dictionary<string, int>();
             int islandCount = 0;
 
@@ -553,7 +647,7 @@ namespace IslesOfWarUtility
 
                 string hexName = isle.Key;
                 Island island = isle.Value;
-                sb.AppendLine(island.Owner + " owns " + hexName);
+                sb.AppendLine("<pre>" + island.Owner + " owns " + hexName + "</pre>");
                  
                 if (island.SquadCounts != null && island.SquadPlans != null)
                 {
@@ -579,10 +673,11 @@ namespace IslesOfWarUtility
             }
 
             // island counts
-            sb.AppendLine();
+            sb.AppendLine("<p></p>");
             sb.Replace("###PLAYERISLANDCOUNT###", name + " OWNS " + islandCount.ToString() + " ISLANDS");
+            sb.AppendLine(GetFooter());
 
-            webBrowser1.DocumentText = "<pre>" + sb.ToString() + "</pre>";
+            webBrowser1.DocumentText = sb.ToString(); // "<pre>" + sb.ToString() + "</pre>";
         }
     }
 }

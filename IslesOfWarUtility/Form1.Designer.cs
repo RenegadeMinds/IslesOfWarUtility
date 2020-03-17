@@ -72,6 +72,7 @@
             this.wbBrowser.Location = new System.Drawing.Point(0, 0);
             this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbBrowser.Name = "wbBrowser";
+            this.wbBrowser.ScriptErrorsSuppressed = true;
             this.wbBrowser.Size = new System.Drawing.Size(514, 397);
             this.wbBrowser.TabIndex = 3;
             // 
@@ -93,6 +94,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.Size = new System.Drawing.Size(494, 397);
             this.webBrowser1.TabIndex = 6;
             // 
