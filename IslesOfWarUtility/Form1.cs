@@ -22,7 +22,7 @@ namespace IslesOfWarUtility
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            // Not doing anything here.
         }
 
         private void btnGetGameState_Click(object sender, EventArgs e)
