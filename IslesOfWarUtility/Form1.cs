@@ -27,7 +27,7 @@ namespace IslesOfWarUtility
 
         private void btnGetGameState_Click(object sender, EventArgs e)
         {
-            string s = Blah("getcurrentstate.bat");
+            //string s = Blah("getcurrentstate.bat");
             Application.DoEvents();
 
             GspRoot gsp = GetGsp();
