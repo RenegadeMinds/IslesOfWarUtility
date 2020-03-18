@@ -249,11 +249,14 @@ namespace IslesOfWarUtility
                 int tileNumber = Convert.ToInt32(island.SquadPlans[j][0]);
                 // List blockers & bunkers 
                 string defenses = island.Defenses;
+                string features = island.Features;
                 char defense = defenses[tileNumber];
+                char feature = features[tileNumber];
                 string blocker = GetBlockerFromChar(defense);
                 string bunkers = GetBunkersFromChar(defense);
+                string terrain = GetTerrainFromChar(feature);
 
-                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;Squad #" + (j + 1).ToString() + " on tile " + tileNumber.ToString() + " with " + blocker + " and " + bunkers);
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;Squad #" + (j + 1).ToString() + " on tile " + tileNumber.ToString() + "  ==> " + terrain + " with " + blocker + " and " + bunkers);
 
                 sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Riflemen.PadRight(pad) + " = " + sc[0].ToString().PadLeft(12, ' '));
                 sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MachineGunners.PadRight(pad) + " = " + sc[1].ToString().PadLeft(12, ' '));
@@ -425,6 +428,31 @@ namespace IslesOfWarUtility
             return "Unknown blocker";
         }
 
+        private string GetTerrainFromChar(char terrain)
+        {
+            if (terrain == ')' || terrain == '!' || terrain == '@' || terrain == '#' || terrain == '$' || terrain == '%' || terrain == '^' || terrain == '&')
+            {
+                // No terrain
+                return "No terrain";
+            }
+            if (terrain == '0' || terrain == '1' || terrain == '2' || terrain == '3' || terrain == '4' || terrain == '5' || terrain == '6' || terrain == '7')
+            {
+                // Troop terrain
+                return "Hills (allows all troop types)";
+            }
+            if (terrain == 'a' || terrain == 'b' || terrain == 'c' || terrain == 'd' || terrain == 'e' || terrain == 'f' || terrain == 'g' || terrain == 'h')
+            {
+                // Tank terrain
+                return "Lakes (blocks tanks)";
+            }
+            if (terrain == 'A' || terrain == 'B' || terrain == 'C' || terrain == 'D' || terrain == 'E' || terrain == 'F' || terrain == 'G' || terrain == 'H')
+            {
+                // Aircraft terrain
+                return "Mountains (blocks aircraft)";
+            }
+
+            return "Unknown terrain";
+        }
 
 
         private string Blah(string file)
