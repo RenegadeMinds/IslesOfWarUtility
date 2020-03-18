@@ -253,17 +253,17 @@ namespace IslesOfWarUtility
                 string blocker = GetBlockerFromChar(defense);
                 string bunkers = GetBunkersFromChar(defense);
 
-                sb.AppendLine("\tSquad #" + (j + 1).ToString() + " on tile " + tileNumber.ToString() + " with " + blocker + " and " + bunkers);
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;Squad #" + (j + 1).ToString() + " on tile " + tileNumber.ToString() + " with " + blocker + " and " + bunkers);
 
-                sb.AppendLine("\t\t" + unitNames.Riflemen.PadRight(pad) + " = " + sc[0].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.MachineGunners.PadRight(pad) + " = " + sc[1].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.Bazookamen.PadRight(pad) + " = " + sc[2].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.LightTanks.PadRight(pad) + " = " + sc[3].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.MediumTanks.PadRight(pad) + " = " + sc[4].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.HeavyTanks.PadRight(pad) + " = " + sc[5].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.LightFighters.PadRight(pad) + " = " + sc[6].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.MediumFighters.PadRight(pad) + " = " + sc[7].ToString().PadLeft(12, ' '));
-                sb.AppendLine("\t\t" + unitNames.Bombers.PadRight(pad) + " = " + sc[8].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Riflemen.PadRight(pad) + " = " + sc[0].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MachineGunners.PadRight(pad) + " = " + sc[1].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Bazookamen.PadRight(pad) + " = " + sc[2].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.LightTanks.PadRight(pad) + " = " + sc[3].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MediumTanks.PadRight(pad) + " = " + sc[4].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.HeavyTanks.PadRight(pad) + " = " + sc[5].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.LightFighters.PadRight(pad) + " = " + sc[6].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MediumFighters.PadRight(pad) + " = " + sc[7].ToString().PadLeft(12, ' '));
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Bombers.PadRight(pad) + " = " + sc[8].ToString().PadLeft(12, ' '));
             }
             sb.AppendLine("</pre>");
 
