@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnGetGameState = new System.Windows.Forms.Button();
-            this.srtbResults = new SearchableControls.SearchableRichTextBox();
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.cbxPlayers = new System.Windows.Forms.ComboBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
@@ -51,20 +50,6 @@
             this.btnGetGameState.Text = "Get game state";
             this.btnGetGameState.UseVisualStyleBackColor = true;
             this.btnGetGameState.Click += new System.EventHandler(this.btnGetGameState_Click);
-            // 
-            // srtbResults
-            // 
-            this.srtbResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.srtbResults.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.srtbResults.Location = new System.Drawing.Point(12, 41);
-            this.srtbResults.Name = "srtbResults";
-            this.srtbResults.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.srtbResults.Size = new System.Drawing.Size(336, 109);
-            this.srtbResults.TabIndex = 2;
-            this.srtbResults.Text = "";
-            this.srtbResults.Visible = false;
             // 
             // wbBrowser
             // 
@@ -124,7 +109,6 @@
             this.ClientSize = new System.Drawing.Size(1036, 450);
             this.Controls.Add(this.scBrowsers);
             this.Controls.Add(this.cbxPlayers);
-            this.Controls.Add(this.srtbResults);
             this.Controls.Add(this.btnGetGameState);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -143,7 +127,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnGetGameState;
-        private SearchableControls.SearchableRichTextBox srtbResults;
         private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.ComboBox cbxPlayers;
         private System.Windows.Forms.WebBrowser webBrowser1;
