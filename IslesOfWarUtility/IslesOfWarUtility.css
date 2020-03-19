@@ -12,6 +12,11 @@ h2 {
     font-family: "Courier New", monospace;
 }
 
+h3 {
+    color: #0000ff;
+    font-family: "Courier New", monospace;
+}
+
 pre {
     font-family: "Courier New", monospace;
     line-height: 100%;
@@ -24,5 +29,13 @@ p {
 }
 
 b {
+    color: #ff0000;
+}
+
+.targetedForAttack {
+    color: #0000ff;
+}
+
+.playerName {
     color: #ff0000;
 }

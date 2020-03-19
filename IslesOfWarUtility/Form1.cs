@@ -34,7 +34,7 @@ namespace IslesOfWarUtility
 
             Dictionary<string, Player> playersU = gsp.Result.Gamestate.Players;
             SortedDictionary<string, Player> players = new SortedDictionary<string, Player>(playersU);
-
+            
             PopulatePlayerDropDown(gsp);
 
             StringBuilder sb = new StringBuilder();
@@ -102,6 +102,8 @@ namespace IslesOfWarUtility
                 string hexName = isle.Key;
                 Island island = isle.Value;
                 sb.AppendLine("<pre>" + island.Owner + " owns " + hexName + "</pre>");
+                // Add in if there's a player attacking it
+                sb.AppendLine(GetAttackingPlayer(hexName, players));
 
                 if (island.SquadCounts != null && island.SquadPlans != null)
                 {
@@ -131,6 +133,12 @@ namespace IslesOfWarUtility
                     islandCount++;
                 }
             }
+
+            // Islands targeted for attack.
+            sb.AppendLine("<p></p>");
+            sb.AppendLine("<h1><a id=\"IslandsTargetedForAttack\"></a>ISLANDS TARGETED FOR ATTACK</h1>");
+            sb.AppendLine(GetIslandsTargetedForAttack(players, islands));
+
             sb.AppendLine("<p></p>");
             sb.AppendLine("<h1><a id=\"HowManyIslands\"></a>HOW MANY ISLANDS DOES EACH PLAYER OWN?</h1>");
             sb.AppendLine("<h2>" + islandCount.ToString() + " ISLANDS TOTAL</h2>");
@@ -162,6 +170,55 @@ namespace IslesOfWarUtility
             gsp = JsonConvert.DeserializeObject<GspRoot>(text);
 
             return gsp;
+        }
+
+        private string GetIslandsTargetedForAttack(SortedDictionary<string, Player> players, Dictionary<string, Island> islands)
+        {
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+            int count = 0;
+
+            foreach (var p in players)
+            {
+                count = 0;
+                string name = p.Key;
+                Player player = p.Value;
+
+                sb2.AppendLine("<h3>" + name + "'s Islands Targeted for Attack</h3>");
+                sb2.AppendLine("<pre>");
+                foreach(var isle in player.Islands)
+                {
+                    if ( islands[isle].AttackingPlayers.Count > 0)
+                    {
+                        string txt = islands[isle].AttackingPlayers[0] + " is targeting ";
+                        sb2.AppendLine(txt.PadRight(35) + isle);
+                        count++;
+                    }
+                }
+                sb2.AppendLine("</pre>");
+                if (count > 0)
+                {
+                    sb.AppendLine(sb2.ToString());
+                }
+                sb2.Clear();
+            }
+
+            return sb.ToString();
+        }
+
+        private string GetAttackingPlayer(string island, SortedDictionary<string, Player> players)
+        {
+            string attack = string.Empty;
+            foreach (var p in players)
+            {
+                if (island == p.Value.AttackableIsland)
+                {
+                    attack += "<pre class=\"targetedForAttack\">Island targeted for attack by <span class=\"playerName\">" + p.Key + "</span></pre>";
+                    break; // I'm assuming only 1 player can attack any given island
+                }
+            }
+
+            return attack;
         }
 
         private string GetPlayerCombatUnits(Player player)
@@ -256,12 +313,21 @@ namespace IslesOfWarUtility
         {
             List<long> sc = new List<long>();
             StringBuilder sb = new StringBuilder();
+
+            // Sort the islands with squads so that they display nicely. 
+            List<long> squadPlans = new List<long>();
+            for (int c = 0; c < island.SquadPlans.Count; c++)
+            {
+                squadPlans.Add(island.SquadPlans[c][0]);
+            }
+            squadPlans.Sort();
+
             sb.AppendLine("<pre>");
             // Add in all tiles with squads on them
             for (int j = 0; j < squadCountCount; j++)
             {
                 sc = island.SquadCounts[j];
-                int tileNumber = Convert.ToInt32(island.SquadPlans[j][0]);
+                int tileNumber = Convert.ToInt32(squadPlans[j]);    // Convert.ToInt32(island.SquadPlans[j][0]);
                 // List blockers & bunkers & features (terrain)
                 string defenses = island.Defenses;
                 string features = island.Features;
@@ -497,7 +563,7 @@ namespace IslesOfWarUtility
             if (terrain == '0' || terrain == '1' || terrain == '2' || terrain == '3' || terrain == '4' || terrain == '5' || terrain == '6' || terrain == '7')
             {
                 // Troop terrain
-                return "Hills (allows all troop types)";
+                return "Hills (allows all unit types)";
             }
             if (terrain == 'a' || terrain == 'b' || terrain == 'c' || terrain == 'd' || terrain == 'e' || terrain == 'f' || terrain == 'g' || terrain == 'h')
             {
@@ -597,7 +663,7 @@ p {
     top:10px;right:10px;  
     z-index:100; 
     width: 200px; 
-    height: 220px; 
+    height: 250px; 
     margin: auto; 
     padding: 10px;
     border-radius: 10px; 
@@ -609,6 +675,7 @@ p {
 <a href=""#PlayerCombatUnits"">Player combat units</a><br /><br />
 <a href=""#PlayerResources"">Player resources</a><br /><br />
 <a href=""#IslandsAndTheirDefenses"">Islands and their defenses</a><br /><br />
+<a href=""#IslandsTargetedForAttack"">Islands targeted for attack</a><br /><br />
 <a href=""#HowManyIslands"">How many islands?</a><br />
 </div>";
 
@@ -699,7 +766,9 @@ p {
                 string hexName = isle.Key;
                 Island island = isle.Value;
                 sb.AppendLine("<pre>" + island.Owner + " owns " + hexName + "</pre>");
-                
+                // Add in if there's a player attacking it
+                sb.AppendLine(GetAttackingPlayer(hexName, players));
+
                 // This adds in all islands with squads deployed.
                 if (island.SquadCounts != null && island.SquadPlans != null)
                 {
