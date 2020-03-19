@@ -53,6 +53,14 @@ namespace IslesOfWarUtility
             sb.AppendLine("<p>Island count = " + gsp.Result.Gamestate.Islands.Count.ToString() + "</p>");
             sb.AppendLine("<p></p>");
 
+            // Display resource pools.
+
+            sb.AppendLine("<h1><a id=\"Pools\"></a>POOLS</h1>");
+            sb.AppendLine("<pre>Oil: ".PadRight(16) + gsp.Result.Gamestate.ResourcePools[0].ToString("n0").PadLeft(20) + "</pre>");
+            sb.AppendLine("<pre>Metal: ".PadRight(16) + gsp.Result.Gamestate.ResourcePools[1].ToString("n0").PadLeft(20) + "</pre>");
+            sb.AppendLine("<pre>Concrete: ".PadRight(16) + gsp.Result.Gamestate.ResourcePools[2].ToString("n0").PadLeft(20) + "</pre>");
+            sb.AppendLine("<pre>Warbux: ".PadRight(16) + gsp.Result.Gamestate.WarbucksPool.ToString("n0").PadLeft(20) + "</pre>");
+
             // Get combat unit numbers for each player. 
             sb.AppendLine("<h1><a id=\"PlayerCombatUnits\"></a>PLAYER COMBAT UNITS</h1>");
             sb.AppendLine("<p></p>");
@@ -103,7 +111,13 @@ namespace IslesOfWarUtility
 
                     sb.AppendLine(GetDefenderSquadInfo(island, squadCountCount, unitNames, pad));
                 }
-                
+                else
+                {
+                    // Add in for islands with no squads
+                    sb.AppendLine("<pre>");
+                    sb.AppendLine(GetDefenderNoSquadInfo(island));
+                    sb.AppendLine("</pre>");
+                }
 
                 // There are 12 hexes per island. Each one can have a squad.
                 if (playerIslandCount.Keys.Contains<string>(island.Owner))
@@ -243,11 +257,12 @@ namespace IslesOfWarUtility
             List<long> sc = new List<long>();
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<pre>");
+            // Add in all tiles with squads on them
             for (int j = 0; j < squadCountCount; j++)
             {
                 sc = island.SquadCounts[j];
                 int tileNumber = Convert.ToInt32(island.SquadPlans[j][0]);
-                // List blockers & bunkers 
+                // List blockers & bunkers & features (terrain)
                 string defenses = island.Defenses;
                 string features = island.Features;
                 char defense = defenses[tileNumber];
@@ -268,7 +283,53 @@ namespace IslesOfWarUtility
                 sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.MediumFighters.PadRight(pad) + " = " + sc[7].ToString().PadLeft(12, ' '));
                 sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Bombers.PadRight(pad) + " = " + sc[8].ToString().PadLeft(12, ' '));
             }
+
+            // Add in all the tiles with no squad on them
+            sb.AppendLine(GetDefenderNoSquadInfo(island));
+
             sb.AppendLine("</pre>");
+
+            return sb.ToString();
+        }
+
+        private string GetDefenderNoSquadInfo(Island island)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            List<long> skipTiles = new List<long>();
+            if (island.SquadPlans != null)
+            {
+                for (int c = 0; c < island.SquadPlans.Count; c++)
+                {
+                    skipTiles.Add(island.SquadPlans[c][0]);
+                }
+            }
+            else
+            {
+                skipTiles.Add(-1);
+            }
+
+            // Add in all tiles with NO squads on them
+            for (int j = 0; j < 12; j++)
+            {
+                // If there's a squad, continue
+                if (skipTiles.Contains(j))
+                    continue;
+
+                int tileNumber = j;
+
+                // There's no squad - do blockers, terrain, and bunkers
+                // List blockers & bunkers 
+                string defenses = island.Defenses;
+                string features = island.Features;
+                char defense = defenses[tileNumber];
+                char feature = features[tileNumber];
+                string blocker = GetBlockerFromChar(defense);
+                string bunkers = GetBunkersFromChar(defense);
+                string terrain = GetTerrainFromChar(feature);
+
+                sb.AppendLine("&nbsp;&nbsp;&nbsp;&nbsp;No squad on tile " + tileNumber.ToString() + "  ==> " + terrain + " with " + blocker + " and " + bunkers);
+            }
 
             return sb.ToString();
         }
@@ -358,8 +419,6 @@ namespace IslesOfWarUtility
             sb.Append("<pre>&nbsp;&nbsp;&nbsp;&nbsp;" + unitNames.Bombers.PadRight(pad, ' '));
             sb.Append("=" + string.Format("{0:n0}", bombers).ToString().PadLeft(12, ' ') + "</pre>" + Environment.NewLine);
 
-
-
             return sb.ToString();
         }
 
@@ -372,27 +431,27 @@ namespace IslesOfWarUtility
             }
             if (bunkers == '!' || bunkers == '1' || bunkers == 'b' || bunkers == 'B')
             {
-                return "Troop bunker";
+                return "<b>Troop bunker</b>";
             }
             if (bunkers == '@' || bunkers == '2' || bunkers == 'c' || bunkers == 'C')
             {
-                return "Tank bunker";
+                return "<b>Tank bunker</b>";
             }
             if (bunkers == '#' || bunkers == '3' || bunkers == 'd' || bunkers == 'D')
             {
-                return "Air bunker";
+                return "<b>Air bunker</b>";
             }
             if (bunkers == '$' || bunkers == '4' || bunkers == 'e' || bunkers == 'E')
             {
-                return "Troop & Tank bunkers";
+                return "<b>Troop & Tank bunkers</b>";
             }
             if (bunkers == '%' || bunkers == '5' || bunkers == 'f' || bunkers == 'F')
             {
-                return "Troop & Air bunkers";
+                return "<b>Troop & Air bunkers</b>";
             }
             if (bunkers == '^' || bunkers == '6' || bunkers == 'g' || bunkers == 'G')
             {
-                return "Tank & Air bunkers";
+                return "<b>Tank & Air bunkers</b>";
             }
             if (bunkers == '&' || bunkers == '7' || bunkers == 'h' || bunkers == 'H')
             {
@@ -412,17 +471,17 @@ namespace IslesOfWarUtility
             if (blocker == '0' || blocker == '1' || blocker == '2' || blocker == '3' || blocker == '4' || blocker == '5' || blocker == '6' || blocker == '7')
             {
                 // Troop blocker
-                return "Troop blocker";
+                return "<b>Troop blocker</b>";
             }
             if (blocker == 'a' || blocker == 'b' || blocker == 'c' || blocker == 'd' || blocker == 'e' || blocker == 'f' || blocker == 'g' || blocker == 'h')
             {
                 // Tank blocker
-                return "Tank blocker";
+                return "<b>Tank blocker</b>";
             }
             if (blocker == 'A' || blocker == 'B' || blocker == 'C' || blocker == 'D' || blocker == 'E' || blocker == 'F' || blocker == 'G' || blocker == 'H')
             {
                 // Aircraft blocker
-                return "Aircraft blocker";
+                return "<b>Aircraft blocker</b>";
             }
 
             return "Unknown blocker";
@@ -443,12 +502,12 @@ namespace IslesOfWarUtility
             if (terrain == 'a' || terrain == 'b' || terrain == 'c' || terrain == 'd' || terrain == 'e' || terrain == 'f' || terrain == 'g' || terrain == 'h')
             {
                 // Tank terrain
-                return "Lakes (blocks tanks)";
+                return "Lakes (<b>blocks tanks</b>)";
             }
             if (terrain == 'A' || terrain == 'B' || terrain == 'C' || terrain == 'D' || terrain == 'E' || terrain == 'F' || terrain == 'G' || terrain == 'H')
             {
                 // Aircraft terrain
-                return "Mountains (blocks aircraft)";
+                return "Mountains (<b>blocks aircraft</b>)";
             }
 
             return "Unknown terrain";
@@ -477,51 +536,6 @@ namespace IslesOfWarUtility
             return output;
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((e.Control && e.KeyCode == Keys.F))
-            {
-                // Do search
-                Search();
-            }
-        }
-
-        private void Search()
-        {
-            
-        }
-
-        private void btnFindPlayers_Click(object sender, EventArgs e)
-        {
-            
-
-            string s = Blah("getcurrentstate.bat");
-            Application.DoEvents();
-
-            // Read in the JSON for the current game state. 
-            string text = System.IO.File.ReadAllText(@"isleofwar.json");
-
-            text = text.Replace("\"gamestate\":\"{", "\"gamestate\":{"); // Fix first quote.
-            text = text.Replace("}\",\"height\":", "},\"height\":"); // Fix end quote.
-            text = text.Replace("\\\"", "\""); // Fix improperly escaped quotes.
-            System.IO.File.WriteAllText("isleofwar.json", text);
-
-            GspRoot gsp = new GspRoot();
-
-            // Deserialize the JSON into the GspRoot class as an object.
-            gsp = JsonConvert.DeserializeObject<GspRoot>(text);
-
-            Dictionary<string, Player> players = gsp.Result.Gamestate.Players;
-
-            cbxPlayers.DataSource = new BindingSource(players, null);
-            cbxPlayers.DisplayMember = "Key";
-            cbxPlayers.ValueMember = "Value";
-
-            // Get combobox selection (in handler)
-            // Player player = ((KeyValuePair<string, Player>)cbxPlayers.SelectedItem).Value;
-
-        }
-
         private void PopulatePlayerDropDown(GspRoot gsp)
         {
             Dictionary<string, Player> players = gsp.Result.Gamestate.Players;
@@ -539,6 +553,13 @@ namespace IslesOfWarUtility
         {
             string css = string.Empty;
 
+            try
+            {
+                string text = System.IO.File.ReadAllText(@"IslesOfWarUtility.css");
+                css = "<style>" + Environment.NewLine + text + Environment.NewLine + "</style>";
+            }
+            catch
+            {
             css = @"
 <style>
 h1 {
@@ -563,6 +584,7 @@ p {
 }
 </style>
 ";
+            }
 
             return css;
         }
@@ -575,7 +597,7 @@ p {
     top:10px;right:10px;  
     z-index:100; 
     width: 200px; 
-    height: 200px; 
+    height: 220px; 
     margin: auto; 
     padding: 10px;
     border-radius: 10px; 
@@ -583,6 +605,7 @@ p {
     background-color: white;
 "">  
 <a href=""#top"">Top</a><br /><br />
+<a href=""#Pools"">Pools</a><br /><br />
 <a href=""#PlayerCombatUnits"">Player combat units</a><br /><br />
 <a href=""#PlayerResources"">Player resources</a><br /><br />
 <a href=""#IslandsAndTheirDefenses"">Islands and their defenses</a><br /><br />
@@ -676,7 +699,8 @@ p {
                 string hexName = isle.Key;
                 Island island = isle.Value;
                 sb.AppendLine("<pre>" + island.Owner + " owns " + hexName + "</pre>");
-                 
+                
+                // This adds in all islands with squads deployed.
                 if (island.SquadCounts != null && island.SquadPlans != null)
                 {
                     // Add in defenses for each island
@@ -685,7 +709,13 @@ p {
 
                     sb.AppendLine( GetDefenderSquadInfo(island, squadCountCount, unitNames, pad));
                 }
-
+                else
+                {
+                    // Add in for islands with no squads
+                    sb.AppendLine("<pre>");
+                    sb.AppendLine(GetDefenderNoSquadInfo(island));
+                    sb.AppendLine("</pre>");
+                }
 
                 // There are 12 hexes per island. Each one can have a squad.
                 if (playerIslandCount.Keys.Contains<string>(island.Owner))

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnGetGameState = new System.Windows.Forms.Button();
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
@@ -115,7 +114,6 @@
             this.Name = "Form1";
             this.Text = "Isles of War utility";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.scBrowsers.Panel1.ResumeLayout(false);
             this.scBrowsers.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scBrowsers)).EndInit();

@@ -107,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GoldCrown.ico" />
+    <Content Include="IslesOfWarUtility.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">

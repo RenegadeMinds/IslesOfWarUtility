@@ -1,0 +1,28 @@
+﻿body {
+    font-family: "Courier New", monospace;
+}
+
+h1 {
+    color: #ff0000;
+    font-family: "Courier New", monospace;
+}
+
+h2 {
+    color: #0000ff;
+    font-family: "Courier New", monospace;
+}
+
+pre {
+    font-family: "Courier New", monospace;
+    line-height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+p {
+    font-family: "Courier New", monospace;
+}
+
+b {
+    color: #ff0000;
+}
