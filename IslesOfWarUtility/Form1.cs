@@ -94,6 +94,9 @@ namespace IslesOfWarUtility
             sb.AppendLine("<p></p>");
             sb.AppendLine("<h1><a id=\"IslandsAndTheirDefenses\"></a>ISLANDS AND THEIR DEFENSES</h1>");
             sb.AppendLine("<p></p>");
+            sb.AppendLine(GetIslandNumbering());
+            sb.AppendLine("<p></p>");
+
             Dictionary<string, int> playerIslandCount = new Dictionary<string, int>();
             int islandCount = 0;
 
@@ -152,6 +155,21 @@ namespace IslesOfWarUtility
 
             string newtext = sb.ToString();
             wbBrowser.DocumentText = newtext; // "<pre>" + newtext + "</pre>";
+        }
+
+        private string GetIslandNumbering()
+        {
+            StringBuilder sb = new StringBuilder();
+            // Add in text diagram of island numbering
+            sb.AppendLine("<h3>Island Numbering</h3>");
+            sb.AppendLine("<pre>");
+            sb.AppendLine(@"11    7    3
+10    6    2
+9     5    1
+8     4    0");
+            sb.AppendLine("</pre>");
+
+            return sb.ToString();
         }
 
         private GspRoot GetGsp()
@@ -748,6 +766,7 @@ p {
             // islands & defences
             sb.AppendLine("<p></p>");
             sb.AppendLine("<h2>ISLANDS AND THEIR DEFENSES</h2>");
+            sb.AppendLine(GetIslandNumbering());
 
             // What islands have what resources or defenses? Let's ignore resources for now as it's a bunch of arrays - just do defenses. 
             sb.AppendLine("<p></p>");

@@ -1,0 +1,112 @@
+Get the value of the pools from [resourcePools] in the game state.
+"resourcePools":[1526408.9595639706, 3650904.803284049, 479078.9873087406]
+
+These pools are a percent of all of the purchases in the game. Currently 90%.
+"purchaseToPoolPercents":[[0.9,0.9,0.9,0.9],[0.9,0.9,0.9,0.9],[0.9,0.9,0.9,0.9],[0.9,0.9,0.9,0.9]]
+Note:(To get how much has been spent since the last pool reward, just divide each by 0.9.)
+
+The resource pool order is oil, metal, concrete.
+Oil      = 1526408.9595639706
+Metal    = 3650904.803284049
+Concrete = 479078.9873087406
+
+These are not the only values that contribute to the pool size. What players have put in also contributes to the size.
+These contributions are found in [resourceContributions]. 
+"resourceContributions":
+{
+	"Cairo Denji":
+	[
+		[0.0,		0.0,	10000.0],	//Contributions to Oil Pool
+		[0.0,		0.0,	10000.0],   //Contributions to Metal Pool
+		[10000.0,	0.0,	0.0]        //Contributions to Concrete Pool
+	],
+	"tyki":
+	[
+		[0.0,		100000.0,	100000.0], //Contributions to Oil Pool
+		[100000.0,	0.0,		100000.0], //Contributions to Metal Pool
+		[100000.0,	100000.0,	0.0]  	   //Contributions to Concrete Pool
+	],
+	"111010111":
+	[
+		[0.0,	0.0,	10.0], //Contributions to Oil Pool
+		[0.0,	0.0,	10.0], //Contributions to Metal Pool
+		[10.0,	0.0,	0.0]   //Contributions to Concrete Pool
+	]
+},
+
+Each player will have 3 arrays. They represent the 3 pools they have contributed to in the order of oil, metal, and concrete.
+Each element in the array represents which resource they contributed. The order is again, oil, metal, concrete.
+
+For every player go through each array and add each element to the total pool size.
+Example:
+	Player Oil Contributions:
+		Cairo Denji : 10,000
+		tyki   	    : 200,000
+		111010111   : 10
+		
+	Player Metal Contributions:
+		Cairo Denji : 0
+		tyki   	    : 200,000
+		111010111   : 0
+	
+	Player Concrete Contributions:
+		Cairo Denji : 20,000
+		tyki   	    : 200,000
+		111010111   : 20
+		
+	New Totals:
+		Oil      = 1526408.9595639706 + 10000 + 200000 + 10 = 1736418.9595639706
+		Metal    = 3650904.803284049 + 200000 				= 3850904.80328
+		Concrete = 479078.9873087406 + 20000 + 200000 + 20  = 699098.987309
+		
+Next you must calculate the modifiers for each resource per pool.
+The rule is, for the modifier of a resource, it is equal to the other resource of the pool divided by the resource we are finding the modifier for.
+Example:
+	Oil Pool:
+		Metal Mod 	 = (Concrete)699098.987309 / (Metal)3850904.80328 = 0.18154148778
+		Concrete Mod 	 = (Metal)3850904.80328 / (Concrete)699098.987309 = 5.50838275149
+	
+	Metal Pool:
+		Oil Mod 	 = (Concrete)699098.987309 / (Oil)1736418.9595639706 = 0.40260962566
+		Concrete Mod 	 = (Oil)1736418.9595639706 / (Concrete)699098.987309 = 2.48379555841
+		
+	Concrete Pool:
+		Metal Mod 	 = (Oil)1736418.9595639706 / (Metal)3850904.80328 = 0.45091194102
+		Oil Mod  	 = (Metal)3850904.80328 / (Oil)1736418.9595639706 = 2.2177279176
+		
+Next you calculate the points for a pool a player has with the modifer.
+So for each pool, go through and multiply the contributions of each player by the modifer.
+Example:
+	Oil Pool Contributions Points:
+		Cairo Denji:
+			Metal: 		0 * 0.18154148778 = 		0 points
+			Concrete: 	10000 * 5.50838275149 = 	55083.8275149‬ points
+		tyki:
+			Metal:		100000 * 0.18154148778 = 	18154.148778‬ points
+			Concrete:	100000 * 5.50838275149 = 	550838.275149 points
+		111010111:
+			Metal:		0 * 0.18154148778 = 		0 points
+			Concrete:	10 * 5.50838275149 = 		55.0838275149 points
+
+	(Skipping the others but it is the same process for all based on their own pool's resource modifiers.)
+
+Next add all of the points up to get a total.
+Example:
+	Total Oil Pool Points = 0 + 55083.8275149 + 18154.148778 + 550838.275149 + 0 + 55.0838275149 = 624131.335269 total points
+	
+Then divide each user's individual totals by the total to get their percent of the pool.
+Example:
+	Oil Percentages:
+		Cairo Denji:	55083.8275149/624131.335269 = 8.825678891%
+		tyki:		568992.423927/624131.335269 = 91.165495429%
+		111010111:	55.0838275149/624131.335269 = 0.00882567889%
+		
+Lastly, when the pool is rewarded, you take the users pool percent and you multiply it by the TOTAL pool value and then round down.
+Example:
+	Oil Rewards:
+		Cairo Denji: 	= Mathf.Floor(1736418.9595639706*0.08825678891)   = 153250
+		tyki: 		= Mathf.Floor(1736418.9595639706*0.91165495429)   = 1583014
+		111010111:	= Mathf.Floor(1736418.9595639706*0.0000882567889) = 153
+
+If there are no contributions at pool reward time, then they are kept for the next round.
+		
