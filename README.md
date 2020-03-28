@@ -3,17 +3,17 @@
 A utility for the Xaya game Isles of War.
 
 1. Run Isles of War
-1. Run utility
-1. Click button to get results
+1. Run this utility
+1. Click "Get current state" button to get results
 1. Use drop down menu to get data for a specific player
+
+You can refresh the stats to the latest block by clicking the "Get current state" button again.
 
 You can change the CSS in the `IslesOfWarUtility.css` file for a different look & feel. 
 
 ## Requirements
 
-This is Windows only. You must also have curl installed. 
-
-curl: https://curl.haxx.se/
+This is Windows only. 
 
 ## Planning attacks
 

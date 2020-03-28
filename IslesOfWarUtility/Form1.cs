@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using IslesOfWar;
 using System.Diagnostics;
+using System.Net;
 
 namespace IslesOfWarUtility
 {
@@ -22,15 +23,23 @@ namespace IslesOfWarUtility
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Not doing anything here.
+            // For the JSON RPC stuff, set the net to mainnet.
+            net = mainnet;
         }
+
+        string getCurrentState = "{\"jsonrpc\": \"2.0\", \"id\":\"GetCurrentState\", \"method\": \"getcurrentstate\"}";
 
         private void btnGetGameState_Click(object sender, EventArgs e)
         {
-            string s = Blah("getcurrentstate.bat");
-            Application.DoEvents();
+            // This is old code that used curl.
+            //string s = Blah("getcurrentstate.bat");
+            //Application.DoEvents();
+            //GspRoot gsp = GetGsp();
 
-            GspRoot gsp = GetGsp();
+            // Get GSP without using curl
+            string json = GetJsonRpcResponse(getCurrentState);
+            Application.DoEvents();
+            GspRoot gsp = GetGspFromJson(json);
 
             Dictionary<string, Player> playersU = gsp.Result.Gamestate.Players;
             SortedDictionary<string, Player> players = new SortedDictionary<string, Player>(playersU);
@@ -184,6 +193,7 @@ namespace IslesOfWarUtility
             // Read in the JSON for the current game state. 
             string text = System.IO.File.ReadAllText(@"isleofwar.json");
 
+            // Fix issue with gamestate being stored as a string and not JSON
             text = text.Replace("\"gamestate\":\"{", "\"gamestate\":{"); // Fix first quote.
             text = text.Replace("}\",\"height\":", "},\"height\":"); // Fix end quote.
             text = text.Replace("\\\"", "\""); // Fix improperly escaped quotes.
@@ -193,6 +203,16 @@ namespace IslesOfWarUtility
 
             // Deserialize the JSON into the GspRoot class as an object.
             gsp = JsonConvert.DeserializeObject<GspRoot>(text);
+
+            return gsp;
+        }
+
+        private GspRoot GetGspFromJson(string json)
+        {
+            GspRoot gsp = new GspRoot();
+
+            // Deserialize the JSON into the GspRoot class as an object.
+            gsp = JsonConvert.DeserializeObject<GspRoot>(json);
 
             return gsp;
         }
@@ -616,7 +636,49 @@ namespace IslesOfWarUtility
             return "Unknown terrain";
         }
 
+        // Section to replace using curl
+        #region Getting JSON stuff and RPC stuff
 
+        //int testnet = 18396; // testnet = 18396
+        int mainnet = 8900; // Mainnet = 8600
+        int net = 8900;
+
+        private string GetJsonRpcResponse(string json)
+        {
+            string result = string.Empty;
+
+            using (var webClient = new WebClient())
+            {
+                var response = webClient.UploadString("http://localhost:" + net.ToString(), "POST", json);
+                result = response.ToString();
+            }
+
+            // Fix issue with gamestate being stored as a string and not JSON
+            result = result.Replace("\"gamestate\":\"{", "\"gamestate\":{"); // Fix first quote.
+            result = result.Replace("}\",\"height\":", "},\"height\":"); // Fix end quote.
+            result = result.Replace("\\\"", "\""); // Fix improperly escaped quotes.
+
+            return result;
+        }
+
+        private string GetJsonFromObject(object obj)
+        {
+            string json = "{}";
+            json = JsonConvert.SerializeObject(obj);
+            return json;
+        }
+
+        private dynamic GetObjectFromJson(string json, Type type)
+        {
+            dynamic result;
+
+            result = JsonConvert.DeserializeObject<Type>(json);
+            result = Convert.ChangeType(result, type);
+
+            return result;
+        }
+        #endregion
+        
         private string Blah(string file)
         {
             // https://stackoverflow.com/questions/206323/how-to-execute-command-line-in-c-get-std-out-results
@@ -742,7 +804,14 @@ p {
             // skip 1 time
             if (skip) { skip = false; return; }
 
-            GspRoot gsp = GetGsp();
+            // Old code that used curl
+            //GspRoot gsp = GetGsp();
+
+            // Get GSP without using curl
+            string json = GetJsonRpcResponse(getCurrentState);
+            Application.DoEvents();
+            GspRoot gsp = GetGspFromJson(json);
+
 
             SortedDictionary<string, Player> players = new SortedDictionary<string, Player>( gsp.Result.Gamestate.Players);
 
