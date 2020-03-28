@@ -142,10 +142,17 @@ namespace IslesOfWarUtility
             sb.AppendLine("<h1><a id=\"IslandsTargetedForAttack\"></a>ISLANDS TARGETED FOR ATTACK</h1>");
             sb.AppendLine(GetIslandsTargetedForAttack(players, islands));
 
+            // How many islands each player has
             sb.AppendLine("<p></p>");
             sb.AppendLine("<h1><a id=\"HowManyIslands\"></a>HOW MANY ISLANDS DOES EACH PLAYER OWN?</h1>");
             sb.AppendLine("<h2>" + islandCount.ToString() + " ISLANDS TOTAL</h2>");
             sb.AppendLine("<p></p><pre>");
+            
+            // Sort by player name
+            var l = playerIslandCount.OrderBy(key => key.Key);
+            var dic = l.ToDictionary((keyItem) => keyItem.Key, (valueItem) => valueItem.Value);
+            playerIslandCount = dic;
+
             foreach (var v in playerIslandCount)
             {
                 sb.AppendLine("" + v.Key + " owns " + v.Value.ToString() + " islands");
@@ -161,7 +168,7 @@ namespace IslesOfWarUtility
         {
             StringBuilder sb = new StringBuilder();
             // Add in text diagram of island numbering
-            sb.AppendLine("<h3>Island Numbering</h3>");
+            sb.AppendLine("<h3>Island Tile Numbering</h3>");
             sb.AppendLine("<pre>");
             sb.AppendLine(@"11    7    3
 10    6    2
@@ -196,23 +203,35 @@ namespace IslesOfWarUtility
             StringBuilder sb2 = new StringBuilder();
             int count = 0;
 
+            // Loop through all players
             foreach (var p in players)
             {
                 count = 0;
                 string name = p.Key;
                 Player player = p.Value;
 
+                // Get all of the player's islands that are being attacked
                 sb2.AppendLine("<h3>" + name + "'s Islands Targeted for Attack</h3>");
                 sb2.AppendLine("<pre>");
-                foreach(var isle in player.Islands)
+
+                // Order players alphabetically in a sorted dictionary
+                SortedDictionary<string, string> dic = new SortedDictionary<string, string>();
+                foreach (var isle in player.Islands)
                 {
                     if ( islands[isle].AttackingPlayers.Count > 0)
                     {
-                        string txt = islands[isle].AttackingPlayers[0] + " is targeting ";
-                        sb2.AppendLine(txt.PadRight(35) + isle);
+                        dic.Add(islands[isle].AttackingPlayers[0], isle);
                         count++;
                     }
                 }
+                
+                // Add in those players from a nice, sorted dictionary
+                foreach (var plyr in dic)
+                {
+                    string s = plyr.Key + " is targeting ";
+                    sb2.AppendLine(s.PadRight(35) + plyr.Value);
+                }
+
                 sb2.AppendLine("</pre>");
                 if (count > 0)
                 {
