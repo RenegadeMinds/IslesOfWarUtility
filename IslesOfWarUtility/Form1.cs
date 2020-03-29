@@ -482,8 +482,8 @@ namespace IslesOfWarUtility
             bombers += player.Units[8];
 
             // get all islands into a dictionary
-
-            GspRoot gsp = GetGsp();
+            string json = GetJsonRpcResponse(getCurrentState);
+            GspRoot gsp = GetGspFromJson(json);
             Dictionary<string, Island> dic = gsp.Result.Gamestate.Islands; 
 
             foreach (var isle in dic)
