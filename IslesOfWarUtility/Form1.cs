@@ -79,7 +79,7 @@ namespace IslesOfWarUtility
                 Player player = p.Value;
                 sb.AppendLine("<h1>"+ name + "</h1>");
                 // TOTAL units
-                sb.AppendLine(GetTotalCombatUnits(player, name, pad));
+                sb.AppendLine(GetTotalCombatUnits(player, name, pad, gsp));
                 // AVAILABLE units
                 sb.AppendLine(GetPlayerCombatUnits(player));
             } // End getting combat units for each player.
@@ -457,7 +457,7 @@ namespace IslesOfWarUtility
             return sb.ToString();
         }
 
-        private string GetTotalCombatUnits(Player player, string name, int pad)
+        private string GetTotalCombatUnits(Player player, string name, int pad, GspRoot gsp)
         {
             long riflemen, machinegunners, bazookamen, lighttanks, mediumtanks, heavytanks, lightfighters, mediumfighters, bombers;
             riflemen = 0;
@@ -482,8 +482,6 @@ namespace IslesOfWarUtility
             bombers += player.Units[8];
 
             // get all islands into a dictionary
-            string json = GetJsonRpcResponse(getCurrentState);
-            GspRoot gsp = GetGspFromJson(json);
             Dictionary<string, Island> dic = gsp.Result.Gamestate.Islands; 
 
             foreach (var isle in dic)
@@ -838,7 +836,7 @@ p {
             int pad = 20; // used to pad names & stuff
 
             // Should do TOTAL combat units at the top here
-            sb.AppendLine( GetTotalCombatUnits(player, name, pad));
+            sb.AppendLine( GetTotalCombatUnits(player, name, pad, gsp));
             // Next, available combat units
             sb.AppendLine(GetPlayerCombatUnits(player));
 
